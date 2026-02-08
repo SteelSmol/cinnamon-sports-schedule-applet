@@ -1,0 +1,226 @@
+{
+  "mlb-header": {
+    "type": "header",
+    "description": "MLB"
+  },
+  "enable-mlb": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable MLB"
+  },
+  "mlb-team": {
+    "type": "combobox",
+    "default": "pit",
+    "description": "MLB Team",
+    "dependency": "enable-mlb",
+    "options": {
+      "Arizona Diamondbacks (ARI)": "ari",
+      "Atlanta Braves (ATL)": "atl",
+      "Baltimore Orioles (BAL)": "bal",
+      "Boston Red Sox (BOS)": "bos",
+      "Chicago Cubs (CHC)": "chc",
+      "Chicago White Sox (CWS)": "chw",
+      "Cincinnati Reds (CIN)": "cin",
+      "Cleveland Guardians (CLE)": "cle",
+      "Colorado Rockies (COL)": "col",
+      "Detroit Tigers (DET)": "det",
+      "Houston Astros (HOU)": "hou",
+      "Kansas City Royals (KC)": "kc",
+      "Los Angeles Angels (LAA)": "laa",
+      "Los Angeles Dodgers (LAD)": "lad",
+      "Miami Marlins (MIA)": "mia",
+      "Milwaukee Brewers (MIL)": "mil",
+      "Minnesota Twins (MIN)": "min",
+      "New York Mets (NYM)": "nym",
+      "New York Yankees (NYY)": "nyy",
+      "Oakland Athletics (OAK)": "oak",
+      "Philadelphia Phillies (PHI)": "phi",
+      "Pittsburgh Pirates (PIT)": "pit",
+      "San Diego Padres (SD)": "sd",
+      "San Francisco Giants (SF)": "sf",
+      "Seattle Mariners (SEA)": "sea",
+      "St. Louis Cardinals (STL)": "stl",
+      "Tampa Bay Rays (TB)": "tb",
+      "Texas Rangers (TEX)": "tex",
+      "Toronto Blue Jays (TOR)": "tor",
+      "Washington Nationals (WSH)": "was"
+    }
+  },
+  "nfl-header": {
+    "type": "header",
+    "description": "NFL"
+  },
+  "enable-nfl": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable NFL"
+  },
+  "nfl-team": {
+    "type": "combobox",
+    "default": "pit",
+    "description": "NFL Team",
+    "dependency": "enable-nfl",
+    "options": {
+      "Arizona Cardinals (ARI)": "ari",
+      "Atlanta Falcons (ATL)": "atl",
+      "Baltimore Ravens (BAL)": "bal",
+      "Buffalo Bills (BUF)": "buf",
+      "Carolina Panthers (CAR)": "car",
+      "Chicago Bears (CHI)": "chi",
+      "Cincinnati Bengals (CIN)": "cin",
+      "Cleveland Browns (CLE)": "cle",
+      "Dallas Cowboys (DAL)": "dal",
+      "Denver Broncos (DEN)": "den",
+      "Detroit Lions (DET)": "det",
+      "Green Bay Packers (GB)": "gb",
+      "Houston Texans (HOU)": "hou",
+      "Indianapolis Colts (IND)": "ind",
+      "Jacksonville Jaguars (JAX)": "jax",
+      "Kansas City Chiefs (KC)": "kc",
+      "Las Vegas Raiders (LV)": "lv",
+      "Los Angeles Chargers (LAC)": "lac",
+      "Los Angeles Rams (LAR)": "lar",
+      "Miami Dolphins (MIA)": "mia",
+      "Minnesota Vikings (MIN)": "min",
+      "New England Patriots (NE)": "ne",
+      "New Orleans Saints (NO)": "no",
+      "New York Giants (NYG)": "nyg",
+      "New York Jets (NYJ)": "nyj",
+      "Philadelphia Eagles (PHI)": "phi",
+      "Pittsburgh Steelers (PIT)": "pit",
+      "San Francisco 49ers (SF)": "sf",
+      "Seattle Seahawks (SEA)": "sea",
+      "Tampa Bay Buccaneers (TB)": "tb",
+      "Tennessee Titans (TEN)": "ten",
+      "Washington Commanders (WSH)": "was"
+    }
+  },
+  "nhl-header": {
+    "type": "header",
+    "description": "NHL"
+  },
+  "enable-nhl": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable NHL"
+  },
+  "nhl-team": {
+    "type": "combobox",
+    "default": "pit",
+    "description": "NHL Team",
+    "dependency": "enable-nhl",
+    "options": {
+      "Anaheim Ducks (ANA)": "ana",
+      "Boston Bruins (BOS)": "bos",
+      "Buffalo Sabres (BUF)": "buf",
+      "Calgary Flames (CGY)": "cgy",
+      "Carolina Hurricanes (CAR)": "car",
+      "Chicago Blackhawks (CHI)": "chi",
+      "Colorado Avalanche (COL)": "col",
+      "Columbus Blue Jackets (CBJ)": "cbj",
+      "Dallas Stars (DAL)": "dal",
+      "Detroit Red Wings (DET)": "det",
+      "Edmonton Oilers (EDM)": "edm",
+      "Florida Panthers (FLA)": "fla",
+      "Los Angeles Kings (LA)": "la",
+      "Minnesota Wild (MIN)": "min",
+      "Montréal Canadiens (MTL)": "mtl",
+      "Nashville Predators (NSH)": "nsh",
+      "New Jersey Devils (NJD)": "njd",
+      "New York Islanders (NYI)": "nyi",
+      "New York Rangers (NYR)": "nyr",
+      "Ottawa Senators (OTT)": "ott",
+      "Philadelphia Flyers (PHI)": "phi",
+      "Pittsburgh Penguins (PIT)": "pit",
+      "San Jose Sharks (SJ)": "sjs",
+      "Seattle Kraken (SEA)": "sea",
+      "St. Louis Blues (STL)": "stl",
+      "Tampa Bay Lightning (TB)": "tbl",
+      "Toronto Maple Leafs (TOR)": "tor",
+      "Utah Mammoth (UTAH)": "utah",
+      "Vancouver Canucks (VAN)": "van",
+      "Vegas Golden Knights (VGK)": "vgk",
+      "Washington Capitals (WSH)": "wsh",
+      "Winnipeg Jets (WPG)": "wpg"
+    }
+  },
+  "time-zone": {
+    "type": "combobox",
+    "default": "",
+    "description": "Game time zone",
+    "options": {
+      "System Default": "",
+      "UTC": "Etc/UTC",
+      "Hawaii (US/Hawaii)": "US/Hawaii",
+      "Alaska (US/Alaska)": "US/Alaska",
+      "Pacific Time (US/Pacific)": "US/Pacific",
+      "Mountain Time (US/Mountain)": "US/Mountain",
+      "Central Time (US/Central)": "US/Central",
+      "Eastern Time (US/Eastern)": "US/Eastern",
+      "London (Europe/London)": "Europe/London",
+      "Paris (Europe/Paris)": "Europe/Paris",
+      "Berlin (Europe/Berlin)": "Europe/Berlin",
+      "Moscow (Europe/Moscow)": "Europe/Moscow",
+      "Dubai (Asia/Dubai)": "Asia/Dubai",
+      "India (Asia/Kolkata)": "Asia/Kolkata",
+      "Bangkok (Asia/Bangkok)": "Asia/Bangkok",
+      "Hong Kong (Asia/Hong_Kong)": "Asia/Hong_Kong",
+      "Shanghai (Asia/Shanghai)": "Asia/Shanghai",
+      "Tokyo (Asia/Tokyo)": "Asia/Tokyo",
+      "Sydney (Australia/Sydney)": "Australia/Sydney",
+      "Auckland (Pacific/Auckland)": "Pacific/Auckland"
+    }
+  },
+  "appearance-header": {
+    "type": "header",
+    "description": "Appearance"
+  },
+  "live-refresh": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 5,
+    "max": 120,
+    "step": 5,
+    "units": "sec",
+    "description": "Live game refresh interval"
+  },
+  "icon-size": {
+    "type": "spinbutton",
+    "default": 42,
+    "min": 16,
+    "max": 48,
+    "step": 2,
+    "units": "px",
+    "description": "Icon size"
+  },
+  "text-size": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 7,
+    "max": 18,
+    "step": 1,
+    "units": "pt",
+    "description": "Text size"
+  },
+  "hide-offseason": {
+    "type": "generic",
+    "default": false
+  },
+  "debug-header": {
+    "type": "header",
+    "description": "Debug"
+  },
+  "debug-mode": {
+    "type": "combobox",
+    "default": "",
+    "description": "Preview mode",
+    "options": {
+      "Off (live data)": "",
+      "All Live": "live",
+      "All Scheduled": "pre",
+      "All Final": "final",
+      "Mixed (Live / Scheduled / Final)": "mixed",
+      "All Offseason": "offseason"
+    }
+  }
+}

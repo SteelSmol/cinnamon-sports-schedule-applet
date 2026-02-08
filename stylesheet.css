@@ -1,0 +1,119 @@
+/* ─── Panel container ─── */
+#panel .applet.Sports-Schedule-Applet {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* ─── Outer container for all sport cards ─── */
+.sports-applet-container {
+  spacing: 1px;
+}
+
+/* ─── Separator between cards ─── */
+.sports-separator {
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.18);
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+/* ─── Each game card ─── */
+.sports-applet-box {
+  spacing: 4px;
+  border-radius: 6px;
+  padding: 2px 8px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition-duration: 150;
+}
+
+#panel .applet.Sports-Schedule-Applet:hover .sports-applet-box {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.sports-logo-icon {
+  margin: 0 2px;
+}
+
+/* ─── Shared typography ─── */
+.sports-date-label {
+  font-size: 0.72em;
+  font-weight: normal;
+  color: #a8a8a8;
+}
+
+.sports-label {
+  font-size: 0.88em;
+  font-weight: 500;
+  color: #e0e0e0;
+}
+
+.sports-label-secondary {
+  font-size: 0.78em;
+  font-weight: 500;
+  font-style: normal;
+  color: #b8b8b8;
+}
+
+/* ─── Update flash (brief red highlight on score change) ─── */
+.sports-update-flash {
+  background-color: rgba(255, 59, 48, 0.30);
+  transition-duration: 200;
+}
+
+/* ─── Pre-game: all uniform readable gray ─── */
+.pre-game .sports-label {
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+.pre-game .sports-label-secondary {
+  color: #9c9c9c;
+}
+
+/* ─── Live game: bright score ─── */
+.live-game.sports-applet-box {
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.live-game .sports-label {
+  font-size: 1.02em;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.live-game .sports-label-secondary {
+  font-size: 0.78em;
+  font-weight: 500;
+  color: #d0d0d0;
+}
+
+/* ─── Final game: subdued ─── */
+.final-game.sports-applet-box {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.final-game .sports-label {
+  font-size: 0.95em;
+  font-weight: 600;
+  color: #b8b8b8;
+}
+
+.final-game .sports-label-secondary {
+  color: #7f7f7f;
+}
+
+/* ─── Offseason: compact vertical stack ─── */
+.sports-offseason-box {
+  spacing: 2px;
+  padding: 2px 6px;
+}
+
+.sports-offseason-box .sports-label-secondary {
+  font-size: 0.7em;
+  font-weight: 500;
+  color: #aaaaaa;
+}

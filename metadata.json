@@ -1,0 +1,10 @@
+{
+  "uuid": "sports-schedule-applet@steel",
+  "name": "Sports Schedule Applet",
+  "description": "Track game schedules for your favorite MLB, NFL, or NHL team",
+  "version": "2.0.0",
+  "js-version": 2,
+  "multiversion-compatible": "true",
+  "max-instances": -1,
+  "settings-schema": "settings-schema.json"
+} 

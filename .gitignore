@@ -1,0 +1,6 @@
+/assets
+/cache
+/tests/fixtures
+/_trash
+node_modules/
+CLAUDE.md
