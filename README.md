@@ -1,6 +1,6 @@
 # Sports Schedule Applet
 
-A Cinnamon desktop panel applet that displays live scores, upcoming games, and final results for your favorite MLB, NFL, or NHL team. Sits in your panel with team logos, color-coded game states, and adaptive refresh — no API key required.
+A Cinnamon desktop panel applet that displays live scores, upcoming games, and final results for your favorite MLB, NFL, and NHL teams. Sits in your panel with team logos, color-coded game states, and adaptive refresh — no API key required.
 
 ## Screenshots
 
@@ -9,31 +9,30 @@ A Cinnamon desktop panel applet that displays live scores, upcoming games, and f
 
 ## Features
 
-- **Live scores** with automatic 1-minute refresh during games
-- **Multi-sport** — MLB, NFL, and NHL in a single applet
+- **Live scores** with configurable refresh interval (default 5 seconds)
+- **Multi-sport** — track MLB, NFL, and NHL simultaneously
 - **Smart game priority** — always shows the most relevant game (LIVE > FINAL > SCHEDULED)
 - **Color-coded states** — green (live), yellow (upcoming), gray (final) at a glance
-- **Hover tooltip** — next 7 days of games with scores, times, and venues
-- **Click menu** — quick view of upcoming scheduled games
-- **Adaptive polling** — refreshes every minute during live games, backs off to hourly when idle
-- **Offseason-aware** — gracefully handles the off-season
+- **Hover tooltip** — current game state and scores for each enabled sport
+- **Click menu** — upcoming scheduled games across all enabled sports
+- **Adaptive polling** — fast refresh during live games, backs off to hourly when idle
+- **Offseason-aware** — countdown to next game during the off-season
 - **No API key needed** — uses ESPN's public API
 
 ## Requirements
 
-- Linux Mint or any distribution running **Cinnamon desktop 5.4+**
-- Internet connection (for ESPN API and team logo downloads)
+- **Cinnamon desktop 5.4+**
 
 ## Installation
 
-1. Download or clone this repository:
+1. Clone this repository:
    ```bash
-   git clone https://github.com/SteelSmol/sports-schedule-applet.git
+   git clone https://github.com/SteelSmol/cinnamon-sports-schedule-applet.git
    ```
 
 2. Copy to your Cinnamon applets directory:
    ```bash
-   cp -r sports-schedule-applet ~/.local/share/cinnamon/applets/sports-schedule-applet@steel
+   cp -r cinnamon-sports-schedule-applet ~/.local/share/cinnamon/applets/sports-schedule-applet@steel
    ```
 
 3. Add the applet to your panel:
@@ -41,24 +40,24 @@ A Cinnamon desktop panel applet that displays live scores, upcoming games, and f
    - Search for **Sports Schedule Applet**
    - Click the **+** button to add it
 
-4. Configure your team:
+4. Configure your teams:
    - Right-click the applet → **Configure**
-   - Select your sport and favorite team
+   - Enable the sports you want and select your favorite teams
 
 ## Usage
 
 | Action | What happens |
 |--------|-------------|
-| **Glance** | Panel shows your team's logo, opponent, score/time, and game state |
-| **Hover** | Tooltip displays the next 7 days of games |
+| **Glance** | Panel shows team logos, opponents, scores/times, and game states |
+| **Hover** | Tooltip shows current game state for each enabled sport |
 | **Click** | Popup menu shows upcoming scheduled games |
-| **Right-click → Configure** | Change sport, team, or timezone |
+| **Right-click → Configure** | Change sports, teams, and display settings |
 
 ### Game States
 
 | State | Panel Color | Description |
 |-------|------------|-------------|
-| Live | Green | Game in progress — refreshes every minute |
+| Live | Green | Game in progress |
 | Scheduled | Yellow | Upcoming game — shows start time |
 | Final | Gray | Completed game — shows final score |
 | Day Off | — | No games today |
@@ -68,13 +67,16 @@ A Cinnamon desktop panel applet that displays live scores, upcoming games, and f
 
 | Setting | Description |
 |---------|-------------|
-| Sport | MLB, NFL, or NHL |
-| Team | Your favorite team (list updates per sport) |
-| Timezone | Override for game times (defaults to system timezone) |
+| Enable MLB / NFL / NHL | Toggle each sport on or off |
+| Team | Your favorite team per sport |
+| Game time zone | Override for game times (defaults to system timezone) |
+| Live game refresh interval | How often to refresh during live games (5–120 seconds) |
+| Icon size | Team logo size in the panel (16–48 px) |
+| Text size | Panel text size (7–18 pt) |
 
 ## How It Works
 
-The applet fetches schedule and live game data from ESPN's public API (`site.api.espn.com`). Team logos are downloaded once and cached locally. Refresh intervals adapt to game state — polling every minute during live games and backing off to hourly when nothing is happening.
+The applet fetches schedule and live game data from ESPN's public API (`site.api.espn.com`). Team logos are downloaded once and cached locally. Refresh intervals adapt to game state — polling frequently during live games and backing off to hourly when idle.
 
 ## Running Tests
 
@@ -87,14 +89,13 @@ node tests/runner.js
 ## Troubleshooting
 
 **Applet shows "Loading..." forever**
-Check your internet connection. ESPN's API may be temporarily unavailable.
+ESPN's API may be temporarily unavailable. Check logs with `journalctl --user -f | grep sports-applet`.
 
 **Icons not loading**
 Delete the `assets/` directory and reload Cinnamon (Alt+F2 → `r` → Enter) to re-download logos.
 
 **Wrong game showing**
-The applet prioritizes: LIVE > FINAL (today) > SCHEDULED (today) > SCHEDULED (future). If a final game is showing, it will clear after 5 hours or at midnight.
+The applet prioritizes: LIVE > FINAL (today) > SCHEDULED (today) > SCHEDULED (future). Final games clear after 5 hours or at midnight.
 
 **Reload the applet**
 Press Alt+F2, type `r`, press Enter. This restarts Cinnamon and reloads all applets.
-
