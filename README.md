@@ -11,7 +11,6 @@ Cinnamon panel applet that shows live scores, upcoming games, and results for ML
 - Live scores with configurable refresh (5–120 sec)
 - Hover for current scores, click for upcoming schedule
 - Adapts refresh rate to game state — frequent during live games, hourly when idle
-- Offseason countdown when no games are near
 
 ## Install
 
