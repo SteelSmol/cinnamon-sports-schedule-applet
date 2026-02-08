@@ -396,7 +396,7 @@ class UIManager {
             if (!sport || !schedule || schedule.length === 0) continue;
 
             const teamData = sport.getTeamById(teamId);
-            const sportLabel = teamData?.abbrev || sport.getSportName();
+            const sportLabel = (teamData?.name || sport.getSportName()).split(' ').pop();
             lines.push(`--- ${sportLabel} ---`);
 
             const today = new Date().toISOString().split('T')[0];
