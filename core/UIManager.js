@@ -464,7 +464,8 @@ class UIManager {
             if (!sport) continue;
 
             const teamData = sport.getTeamById(teamId);
-            const sportLabel = teamData?.abbrev || sport.getSportName();
+            const fullName = teamData?.name || sport.getSportName();
+            const sportLabel = fullName.split(' ').pop();
 
             if (!game) {
                 lines.push(`${sportLabel}: No game today`);
