@@ -65,7 +65,6 @@ class SportsScheduleApplet extends Applet.Applet {
         this._settings.bind('icon-size', '_iconSize', () => this._onAppearanceChanged());
         this._settings.bind('text-size', '_textSize', () => this._onAppearanceChanged());
         this._settings.bind('hide-offseason', '_hideOffseason');
-        this._settings.bind('debug-mode', '_debugMode', () => this._onSettingsChanged());
 
         // Defaults
         if (this._enableMlb === undefined) this._enableMlb = true;
@@ -157,16 +156,10 @@ class SportsScheduleApplet extends Applet.Applet {
 
         let results;
 
-        if (this._debugMode) {
-            // Debug mode: generate mock data instead of fetching
-            results = this._generateDebugResults(sportEntries);
-        } else {
-            // Normal mode: fetch all sports in parallel
-            const resultPromises = sportEntries.map(([sportKey, { sport, teamId }]) =>
-                this._updateSportInfo(sportKey, sport, teamId)
-            );
-            results = await Promise.all(resultPromises);
-        }
+        const resultPromises = sportEntries.map(([sportKey, { sport, teamId }]) =>
+            this._updateSportInfo(sportKey, sport, teamId)
+        );
+        results = await Promise.all(resultPromises);
 
         // Update display with all results
         await this._uiManager.updateDisplay(results);
@@ -181,123 +174,6 @@ class SportsScheduleApplet extends Applet.Applet {
             hasError: !!r.error
         }));
         this._scheduler.scheduleNextUpdate(schedulerResults, this._liveRefresh * 1000);
-    }
-
-    _generateDebugResults(sportEntries) {
-        const mode = this._debugMode;
-        // Mixed mode assigns different states per sport index
-        const mixedStates = ['live', 'pre', 'final'];
-
-        return sportEntries.map(([sportKey, { sport, teamId }], index) => {
-            const state = (mode === 'mixed') ? mixedStates[index % 3] : mode;
-            return this._createMockResult(sportKey, sport, teamId, state);
-        });
-    }
-
-    _createMockResult(sportKey, sport, teamId, state) {
-        const result = {
-            sportKey,
-            sport,
-            teamId,
-            game: null,
-            error: false,
-            isOffseason: false,
-            nextSeasonDate: null,
-            timezone: this._timeZone
-        };
-
-        if (state === 'offseason') {
-            result.isOffseason = true;
-            const future = new Date();
-            future.setDate(future.getDate() + 47);
-            result.nextSeasonDate = future;
-            return result;
-        }
-
-        // Pick an opponent (first team in the list that isn't the preferred team)
-        const teams = sport.getTeams();
-        const teamData = sport.getTeamById(teamId);
-        const opponent = teams.find(t => t.id !== teamId) || teams[0];
-
-        const now = new Date();
-
-        if (state === 'live') {
-            result.game = {
-                gamePk: `debug-${sportKey}`,
-                startTime: new Date(now.getTime() - 90 * 60 * 1000), // started 90min ago
-                preferredTeamId: teamId,
-                home: {
-                    id: teamId,
-                    abbrev: teamData?.abbrev || 'HOME',
-                    score: 4
-                },
-                away: {
-                    id: opponent.id,
-                    abbrev: opponent.abbrev,
-                    score: 2
-                },
-                status: { state: 'in', detail: 'In Progress' },
-                venue: 'Debug Arena',
-                live: this._getMockLiveState(sportKey)
-            };
-        } else if (state === 'final') {
-            result.game = {
-                gamePk: `debug-${sportKey}`,
-                startTime: new Date(now.getTime() - 3 * 60 * 60 * 1000), // 3hrs ago
-                preferredTeamId: teamId,
-                home: {
-                    id: teamId,
-                    abbrev: teamData?.abbrev || 'HOME',
-                    score: 6
-                },
-                away: {
-                    id: opponent.id,
-                    abbrev: opponent.abbrev,
-                    score: 3
-                },
-                status: { state: 'post', detail: 'Final' },
-                venue: 'Debug Arena',
-                live: null
-            };
-        } else if (state === 'pre') {
-            const gameTime = new Date(now);
-            gameTime.setHours(19, 10, 0, 0);
-            if (gameTime < now) gameTime.setDate(gameTime.getDate() + 1);
-
-            result.game = {
-                gamePk: `debug-${sportKey}`,
-                startTime: gameTime,
-                preferredTeamId: teamId,
-                home: {
-                    id: opponent.id,
-                    abbrev: opponent.abbrev,
-                    score: 0
-                },
-                away: {
-                    id: teamId,
-                    abbrev: teamData?.abbrev || 'AWAY',
-                    score: 0
-                },
-                status: { state: 'pre', detail: 'Scheduled' },
-                venue: 'Debug Arena',
-                live: null
-            };
-        }
-
-        return result;
-    }
-
-    _getMockLiveState(sportKey) {
-        switch (sportKey) {
-            case 'mlb':
-                return { inning: 5, inningState: 'Top 5th' };
-            case 'nfl':
-                return { quarter: 3, clock: '7:42', isHalftime: false };
-            case 'nhl':
-                return { period: 2, periodTime: '12:33', isIntermission: false };
-            default:
-                return null;
-        }
     }
 
     async _updateSportInfo(sportKey, sport, teamId) {

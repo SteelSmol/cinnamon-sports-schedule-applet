@@ -1,6 +1,6 @@
 # Sports Schedule Applet
 
-A Cinnamon desktop panel applet that displays live scores, upcoming games, and final results for your favorite MLB, NFL, and NHL teams. Sits in your panel with team logos, color-coded game states, and adaptive refresh — no API key required.
+A Cinnamon desktop panel applet that displays live scores, upcoming games, and final results for your favorite MLB, NFL, and NHL teams. Sits in your panel with team logos and adaptive refresh — no API key required.
 
 ## Screenshots
 
@@ -12,7 +12,6 @@ A Cinnamon desktop panel applet that displays live scores, upcoming games, and f
 - **Live scores** with configurable refresh interval (default 5 seconds)
 - **Multi-sport** — track MLB, NFL, and NHL simultaneously
 - **Smart game priority** — always shows the most relevant game (LIVE > FINAL > SCHEDULED)
-- **Color-coded states** — green (live), yellow (upcoming), gray (final) at a glance
 - **Hover tooltip** — current game state and scores for each enabled sport
 - **Click menu** — upcoming scheduled games across all enabled sports
 - **Adaptive polling** — fast refresh during live games, backs off to hourly when idle
@@ -55,13 +54,13 @@ A Cinnamon desktop panel applet that displays live scores, upcoming games, and f
 
 ### Game States
 
-| State | Panel Color | Description |
-|-------|------------|-------------|
-| Live | Green | Game in progress |
-| Scheduled | Yellow | Upcoming game — shows start time |
-| Final | Gray | Completed game — shows final score |
-| Day Off | — | No games today |
-| Offseason | — | Next game is 30+ days away |
+| State | Description |
+|-------|-------------|
+| Live | Game in progress — bold score, frequent refresh |
+| Scheduled | Upcoming game — shows start time |
+| Final | Completed game — subdued final score |
+| Day Off | No games today |
+| Offseason | Next game is 30+ days away — shows countdown |
 
 ## Configuration
 
@@ -78,24 +77,3 @@ A Cinnamon desktop panel applet that displays live scores, upcoming games, and f
 
 The applet fetches schedule and live game data from ESPN's public API (`site.api.espn.com`). Team logos are downloaded once and cached locally. Refresh intervals adapt to game state — polling frequently during live games and backing off to hourly when idle.
 
-## Running Tests
-
-The test suite covers game selection, ESPN response parsing, refresh intervals, and cache logic:
-
-```bash
-node tests/runner.js
-```
-
-## Troubleshooting
-
-**Applet shows "Loading..." forever**
-ESPN's API may be temporarily unavailable. Check logs with `journalctl --user -f | grep sports-applet`.
-
-**Icons not loading**
-Delete the `assets/` directory and reload Cinnamon (Alt+F2 → `r` → Enter) to re-download logos.
-
-**Wrong game showing**
-The applet prioritizes: LIVE > FINAL (today) > SCHEDULED (today) > SCHEDULED (future). Final games clear after 5 hours or at midnight.
-
-**Reload the applet**
-Press Alt+F2, type `r`, press Enter. This restarts Cinnamon and reloads all applets.

@@ -1,6 +1,6 @@
 /assets
 /cache
-/tests/fixtures
+/tests
 /_trash
 node_modules/
 CLAUDE.md

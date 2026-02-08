@@ -205,22 +205,5 @@
   "hide-offseason": {
     "type": "generic",
     "default": false
-  },
-  "debug-header": {
-    "type": "header",
-    "description": "Debug"
-  },
-  "debug-mode": {
-    "type": "combobox",
-    "default": "",
-    "description": "Preview mode",
-    "options": {
-      "Off (live data)": "",
-      "All Live": "live",
-      "All Scheduled": "pre",
-      "All Final": "final",
-      "Mixed (Live / Scheduled / Final)": "mixed",
-      "All Offseason": "offseason"
-    }
   }
 }
